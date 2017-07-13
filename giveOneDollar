@@ -1,0 +1,34 @@
+
+library(vcd)
+
+losers<-50			#乱给人钱的人
+dollars<-100		#初始钱
+times<-100000		#运行次数
+loser<-numeric(0)
+
+for(i in 1:losers) {	#初始化每人的钱
+	loser[i]<-dollars
+}
+
+for(i in 1:times) {			#开始循环
+	for(j in 1:losers) {
+		if(loser[j]>=1) {
+			loser[j]<-loser[j]-1
+			rannum<-floor(runif(1, 1, 51))
+			loser[rannum]<-loser[rannum]+1
+		}
+	}
+	afterordered<-loser[order(loser)]	#排序
+	barplot(afterordered,                            #条形图
+         main="money you left",
+         xlab="NO",ylab="money",
+         col="black",
+         names.arg=(1:50),   #设定横坐标名称
+#         border=NA,                     #条形框不设置边界线        
+         font.main=4,                
+         font.lab=3,
+         beside=TRUE
+)
+}
+
+
